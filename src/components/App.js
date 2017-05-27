@@ -6,10 +6,6 @@ import Router from './Main/Router';
 
 import store from '../store/configureStore.js';
 
-import logo from '../assets/logo.svg';
-
-import './App.css';
-
 export default class App extends Component {
 	state = {
 		token: null

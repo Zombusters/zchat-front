@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    background-color: darkgray;
+}
+
+.loginForm {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    margin-top: 250px;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 0.8rem;
+}
+
+.loginButton {
+    width: 240px;
+    height: 60px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    border-radius: 0.8rem;
+    font-size: 20px;
+    border-color: red;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
