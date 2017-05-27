@@ -8,8 +8,8 @@ export default class MapPage extends Component {
 	GettingStartedGoogleMap = withGoogleMap(props => (
 		<GoogleMap
 			ref={props.onMapLoad}
-			defaultZoom={3}
-			defaultCenter={{ lat: 50.363882, lng: 31.044922 }}
+			defaultZoom={12}
+			defaultCenter={{ lat: 50.463882, lng: 30.544922 }}
 			onClick={props.onMapClick}
 		>
 			{props.markers.map((marker, index) => (

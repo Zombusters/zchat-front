@@ -1,10 +1,9 @@
-import RNFetchBlob  from 'react-native-fetch-blob';
-import store        from '../store/configureStore.js';
+import store from '../store/configureStore.js';
 
 import api from '../apiSingleton.js';
 
 export default class ApiClient {
-    constructor({ prefix = '' } = {}) {
+    constructor({ prefix = 'https://dj9onz9lb9.execute-api.eu-west-1.amazonaws.com/zchat_base' } = {}) {
         this.prefix = prefix;
     }
 
@@ -40,7 +39,7 @@ export default class ApiClient {
         return this.request({
             url: requestUrl,
             method: 'post',
-            body: this.prepareBody(payload),
+            body: JSON.stringify( payload ),
             params
         });
     }
@@ -77,31 +76,31 @@ export default class ApiClient {
         });
     }
 
-    async postFile(url, { fileUri }) {
-        const filename = fileUri.split(/[\\/]/).pop();
+    // async postFile(url, { fileUri }) {
+    //     const filename = fileUri.split(/[\\/]/).pop();
 
-        const res = await RNFetchBlob.fetch('POST', `${this.prefix}/${url}`, {
-            'Content-Type' : 'multipart/form-data',
-            'Authorization': this.authToken
-        }, [
-            { name : 'video', filename, data: RNFetchBlob.wrap(fileUri) }
-        ]).uploadProgress((written, total) => {
-            // for now it's just for debug
-            console.log('uploaded', written / total);
-        });
+    //     const res = await RNFetchBlob.fetch('POST', `${this.prefix}/${url}`, {
+    //         'Content-Type' : 'multipart/form-data',
+    //         'Authorization': this.authToken
+    //     }, [
+    //         { name : 'video', filename, data: RNFetchBlob.wrap(fileUri) }
+    //     ]).uploadProgress((written, total) => {
+    //         // for now it's just for debug
+    //         console.log('uploaded', written / total);
+    //     });
 
-        const data = await res.json();
+    //     const data = await res.json();
 
-        if (data && data.status === 1) {
-            return data;
-        }
+    //     if (data && data.status === 1) {
+    //         return data;
+    //     }
 
-        if (this.onError) {
-            this.onError(data.error);
-        }
+    //     if (this.onError) {
+    //         this.onError(data.error);
+    //     }
 
-        return Promise.reject(data.error);
-    }
+    //     return Promise.reject(data.error);
+    // }
 
     async request(options) {
         const tmpOptions = { ...options };
@@ -120,10 +119,10 @@ export default class ApiClient {
 
         const { connection } = store.getState();
 
-        if (connection.isConnected && this.prefix) {
+        if (this.prefix) {
             const res = await fetch(`${this.prefix}/${options.url}`, { ...tmpOptions,
                 headers: tmpOptions.headers || {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                    'Content-Type': 'application/json; charset=utf-8',
                     'Authorization': this.authToken
                 }
             });
@@ -142,17 +141,5 @@ export default class ApiClient {
         }
 
         return Promise.reject('No internet connection');
-    }
-
-    setAuthToken(authToken) {
-        this.authToken = authToken;
-    }
-
-    setPrefix(prefix = '') {
-        this.prefix = prefix;
-    }
-
-    setErrorHandler(handler) {
-        this.onError = handler;
     }
 }

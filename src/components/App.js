@@ -6,23 +6,13 @@ import Router from './Main/Router';
 
 import store from '../store/configureStore.js';
 
+import MainPage from '../containers/MainPageContainer';
+
 export default class App extends Component {
-	static propTypes = {
-		token: PropTypes.string
-	}
-
-	state = {
-		token: null
-	}
-
 	render() {
-		const { token } = this.props;
-
 		return (
 			<Provider store={store}>
-				{token
-					? <LoginPage />
-					: <Router />}
+				<MainPage />
 			</Provider>
 		);
 	}

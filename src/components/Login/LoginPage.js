@@ -11,16 +11,10 @@ export default class LoginPage extends Component {
 		logIn: PropTypes.func
 	}
 
-	async componentWillMount() {
-		const lol = await get('test');
-
-		console.log('lol', lol)
-	}
-
 	state = {
 		showSingUp: false,
-		username: '',
-		password: ''
+		username: 'test1',
+		password: 'qwerty123'
 	}
 
 	changeUsername = (e) => {

@@ -3,18 +3,30 @@ import PouchDB from 'pouchdb';
 const db = new PouchDB('zchat');
 
 export async function put(data = {}, id) {
-    const doc = await db.get(id);
+    try {
+        const doc = await db.get(id);
 
-    await db.remove(doc);
+        await db.remove(doc);
 
-    await db.put({
-        _id: id,
-        ...data
-    });
+        await db.put({
+            _id: id,
+            ...data
+        });
+    } catch(err) {
+        console.log('whateva')
+    }
 }
 
 export async function get(id) {
-    const data = await db.get(id);
+    try {
+        const data = await db.get(id);
 
-    return data;
+        console.log('wtf', data)
+
+        return data;
+    } catch(err) {
+        console.log('whateva')
+
+        return 'wrong_token';
+    }
 }

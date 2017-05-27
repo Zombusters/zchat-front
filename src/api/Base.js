@@ -1,7 +1,6 @@
 export default class Base {
-    constructor({ apiClient, apiMedia }) {
+    constructor({ apiClient }) {
         if (!apiClient) throw new Error('[apiClient] required');
         this.apiClient = apiClient;
-        this.apiMedia  = apiMedia;
     }
 }
