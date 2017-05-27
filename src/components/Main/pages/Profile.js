@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import './Home.css';
+import './Profile.css';
 
-export default class Home extends Component {
+export default class Profile extends Component {
 	render() {
 		return (
 			<div>
-                <p>Home</p>
+                <p>Profile</p>
             </div>
 		);
 	}
