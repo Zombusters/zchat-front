@@ -1,7 +1,7 @@
 import Base from './Base';
 
 export default class ScheduleAPI extends Base {
-    async getSchedule(subjectId) {
+    async getProfile(subjectId) {
         return await this.apiClient.get(`participant/${subjectId}/surveys`);
     }
 

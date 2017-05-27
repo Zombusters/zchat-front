@@ -120,6 +120,12 @@ export default class ApiClient {
         const { connection } = store.getState();
 
         if (this.prefix) {
+            console.log('apiiiiiiii', { ...tmpOptions,
+                headers: tmpOptions.headers || {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Authorization': this.authToken
+                }
+            })
             const res = await fetch(`${this.prefix}/${options.url}`, { ...tmpOptions,
                 headers: tmpOptions.headers || {
                     'Content-Type': 'application/json; charset=utf-8',
@@ -141,5 +147,9 @@ export default class ApiClient {
         }
 
         return Promise.reject('No internet connection');
+    }
+
+    setAuthToken(authToken) {
+        this.authToken = authToken;
     }
 }

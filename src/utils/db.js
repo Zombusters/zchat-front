@@ -13,7 +13,13 @@ export async function put(data = {}, id) {
             ...data
         });
     } catch(err) {
-        console.log('whateva')
+        if (err.name === 'not_found') {
+            await db.put({
+                _id: id,
+                ...data
+            });
+        }
+        console.log('whateva', err)
     }
 }
 
@@ -25,7 +31,7 @@ export async function get(id) {
 
         return data;
     } catch(err) {
-        console.log('whateva')
+        console.log('whateva', err, id)
 
         return 'wrong_token';
     }

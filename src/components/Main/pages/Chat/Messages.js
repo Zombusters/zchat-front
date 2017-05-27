@@ -4,12 +4,13 @@ export default class Chat extends Component {
 	static propTypes = {
 		withName: PropTypes.string,
         messages: PropTypes.array,
-        getMessages: PropTypes.func
+        sendMessage: PropTypes.func
 	}
 
     state = {
         messages: this.props.messages || [],
-        isReady: false
+        isReady: false,
+        message: ''
     }
 
     async componentWillMount() {
@@ -30,6 +31,16 @@ export default class Chat extends Component {
             : `no messages with ${this.props.withName || 'this person'}`
     }
 
+    onSend = (e) => {
+        e.preventDefault();
+
+        this.props.sendMessage(this.state.message);
+    }
+
+    handleInput = (e) => {
+        this.setState({ message: e.target.value });
+    }
+
 	render() {
         const { isReady } = this.state;
 
@@ -38,6 +49,10 @@ export default class Chat extends Component {
                 {isReady
                     ? this.renderMessages()
                     : 'loading..'}
+                <div className='input'>
+                    <input type='text' onChange={this.handleInput} value={this.state.message} placeholder='Type..' />
+                    <button type='button' onClick={this.onSend}>Send</button>
+                </div>
             </div>
 		);
 	}

@@ -7,7 +7,7 @@ import './Chat.css';
 export default class Chat extends Component {
 	static propTypes = {
 		logIn: PropTypes.func,
-		getMessages: PropTypes.func,
+		sendMessage: PropTypes.func,
 		contact: PropTypes.array,
 	}
 
@@ -36,8 +36,8 @@ export default class Chat extends Component {
 				</div>
 
 				<div className='chat'>
-					{withName
-						? <Messages withName={withName} getMessages={this.props.getMessages} />
+					{!withName
+						? <Messages withName={withName} sendMessage={this.props.sendMessage} />
 						: 'choose someone to chat with'}
 				</div>
             </section>

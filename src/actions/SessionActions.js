@@ -1,4 +1,5 @@
 import { put, get } from '../utils/db';
+import { getMessages } from './ChatActions';
 
 import api from '../apiSingleton.js';
 
@@ -11,12 +12,17 @@ export function checkToken() {
     return async dispatch => {
         try {
             const token = await get('token');
-            console.log('rly')
+            console.log('token', token)
+
             const data = await api.session.verifyToken({
-                token
+                token: token.token
             });
 
-            console.log('verf', data)
+            if (data.non_field_errors) {
+                throw new Error('err');
+            }
+
+            await dispatch(getMessages());
 
             //await put({ token: data.token }, 'token');
 

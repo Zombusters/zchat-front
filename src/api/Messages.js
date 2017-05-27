@@ -1,11 +1,11 @@
 import Base from './Base';
 
-export default class ScheduleAPI extends Base {
+export default class MessageAPI extends Base {
     async getMessages() {
-        return await this.apiClient.get('api/messages');
+        return await this.apiClient.get('api/messages/');
     }
 
-    async updateActivityStatus(activityId) {
-        return await this.apiClient.post(`video/surveySectionResponse/${activityId}/mediaServices`);
+    async sendMessage(message) {
+        return await this.apiClient.post('api/messages/', { text: message });
     }
 }
