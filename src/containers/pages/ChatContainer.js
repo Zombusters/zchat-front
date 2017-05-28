@@ -6,7 +6,8 @@ import * as ChatActions from '../../actions/ChatActions.js';
 
 function mapStateToProps(state) {
     return {
-        messages: state.chat.data
+        messages: state.chat.data,
+        username: state.profile.username
     };
 }
 

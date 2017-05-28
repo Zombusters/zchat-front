@@ -10,7 +10,8 @@ export default class Chat extends Component {
     state = {
         messages: this.props.messages || [],
         isReady: true,
-        message: ''
+        message: '',
+        me: this.props.username
     }
 
     async componentWillMount() {
@@ -20,12 +21,12 @@ export default class Chat extends Component {
     }
 
     renderMessages = () => {
-        const { messages } = this.state;
+        const { messages, me } = this.state;
         console.log('MESSAGE', messages)
 
         return messages.length > 0
             ? messages.map(message => 
-                <div className='message'>
+                <div style={{ width: '600px', textAlign: message.author.username === me ? 'right' : 'left', padding: 5 }}>
                     {JSON.stringify(message.msg)}
                 </div>
             )
@@ -35,7 +36,10 @@ export default class Chat extends Component {
     onSend = (e) => {
         e.preventDefault();
 
-        this.props.sendMessage(this.state.message);
+        const { message, me } = this.state;
+
+        this.props.sendMessage(message);
+        this.setState({ messages: this.state.messages.concat({ author: { username: me }, msg: message }), message: '' })
     }
 
     handleInput = (e) => {

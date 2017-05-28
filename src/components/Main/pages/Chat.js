@@ -18,12 +18,13 @@ export default class Chat extends Component {
 
 	render() {
 		const { contacts, withName } = this.state;
+		const { messages, sendMessage, username } = this.props;
 
 		return (
 			<section className='container'>
 				<div className='chat'>
 					{!withName
-						? <Messages messages={this.props.messages.results} sendMessage={this.props.sendMessage} />
+						? <Messages messages={messages.results} sendMessage={sendMessage} username={username} />
 						: 'choose someone to chat with'}
 				</div>
             </section>
