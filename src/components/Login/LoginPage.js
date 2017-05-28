@@ -87,7 +87,7 @@ export default class LoginPage extends Component {
 							Sing Up
 						</button>
 					</div>)
-					: <Register />}
+					: <Register register={this.props.register} />}
             </div>
 		);
 	}

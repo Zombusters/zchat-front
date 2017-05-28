@@ -5,7 +5,7 @@ import Router from './Main/Router';
 
 export default class MainPage extends Component {
 	static propTypes = {
-		token: PropTypes.string,
+		token: PropTypes.bool,
 		checkToken: PropTypes.func
 	}
 
@@ -13,21 +13,23 @@ export default class MainPage extends Component {
 		token: null
 	}
 
-	async componentWillMount() {
-		try{
-			await this.props.checkToken();
+	// async componentWillMount() {
+	// 	try{
+	// 		await this.props.checkToken();
 
-			this.setState({ token: this.props.token });
-		} catch(err) {
-			this.setState({ token: null });
-		}
-	}
+	// 		this.setState({ token: this.props.token });
+	// 	} catch(err) {
+	// 		this.setState({ token: null });
+	// 	}
+	// }
 
 	render() {
 		const { token } = this.props;
 
+		console.log('wtf', token)
+
 		return !token
             ? <LoginPage />
-            : <Router />;
+            : <Router rem={this.props.rem} />;
 	}
 }

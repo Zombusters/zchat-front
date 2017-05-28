@@ -6,6 +6,6 @@ export default class MessageAPI extends Base {
     }
 
     async sendMessage(message) {
-        return await this.apiClient.post('api/messages/', { text: message });
+        return await this.apiClient.post('api/my-messages/', { msg: message });
     }
 }

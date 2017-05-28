@@ -13,12 +13,12 @@ export default class Session extends Base {
     async verifyToken(params) {
         const data = await this.apiClient.post('api-token-verify/', params);
          
-        await this.apiClient.setAuthToken(`JWT ${params.token}`);
+        // await this.apiClient.setAuthToken(`JWT ${params.token}`);
 
         return data;
     }
 
-    async getUserData() {
-        return await this.apiClient.get('participant');
+    async register(params) {
+        await this.apiClient.post('api/add-user/', params);
     }
 }

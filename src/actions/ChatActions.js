@@ -1,4 +1,5 @@
 import { put, get } from '../utils/db';
+import { rem } from './SessionActions';
 
 import api from '../apiSingleton.js';
 
@@ -13,7 +14,10 @@ export function getMessages() {
 
             const data = await api.messages.getMessages();
 
-            console.log('messages', data)
+            if (data.detail) {
+                await dispatch(rem('token'));
+                throw new Error();
+            }
 
             dispatch({
                 type: GET_MESSAGES_SUCCESS,

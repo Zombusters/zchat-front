@@ -36,3 +36,11 @@ export async function get(id) {
         return 'wrong_token';
     }
 }
+
+export async function del(id) {
+    try {
+        await db.remove(id);
+    } catch(err) {
+        console.log('whateva', err, id)
+    }
+}
