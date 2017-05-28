@@ -22,13 +22,17 @@ export default class Chat extends Component {
 
     renderMessages = () => {
         const { messages, me } = this.state;
-        console.log('MESSAGE', messages)
 
         return messages.length > 0
-            ? messages.map(message => 
-                <div style={{ width: '600px', textAlign: message.author.username === me ? 'right' : 'left', padding: 5 }}>
-                    {JSON.stringify(message.msg)}
-                </div>
+            ? messages.map(message => {
+                const isMe = message.author.username === me;
+                return (
+                    <div style={{ width: '600px', textAlign: isMe ? 'right' : 'left', padding: 5 }}>
+                        {!isMe ? `${message.author.username}: ` : 'Me: '}
+                        {JSON.stringify(message.msg)}
+                    </div>
+                )
+            }
             )
             : `no messages with ${this.props.withName || 'this person'}`
     }
