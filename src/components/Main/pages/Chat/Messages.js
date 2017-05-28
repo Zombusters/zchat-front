@@ -9,7 +9,7 @@ export default class Chat extends Component {
 
     state = {
         messages: this.props.messages || [],
-        isReady: false,
+        isReady: true,
         message: ''
     }
 
@@ -21,13 +21,14 @@ export default class Chat extends Component {
 
     renderMessages = () => {
         const { messages } = this.state;
+        console.log('MESSAGE', messages)
 
         return messages.length > 0
-            ? messages.map(message => {
+            ? messages.map(message => 
                 <div className='message'>
-                    {message}
+                    {JSON.stringify(message.msg)}
                 </div>
-            })
+            )
             : `no messages with ${this.props.withName || 'this person'}`
     }
 

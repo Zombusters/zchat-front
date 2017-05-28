@@ -6,7 +6,11 @@ export default class Profile extends Component {
 	render() {
 		return (
 			<div>
-                <p>Profile</p>
+                {`Profile Options:`}
+				<hr />
+                {`Username: ${this.props.username}`}
+				<hr />
+                {`email: ${this.props.email}`}
             </div>
 		);
 	}

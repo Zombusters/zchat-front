@@ -1,4 +1,4 @@
-import { GET_PROFILE_SUCCESS } from '../actions/ChatActions.js';
+import { GET_PROFILE_SUCCESS } from '../actions/ProfileActions.js';
 
 export default function data(state = {}, action) {
     switch (action.type) {

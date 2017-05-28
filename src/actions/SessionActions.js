@@ -1,6 +1,7 @@
 import { decodeToken } from 'jwt-js';
 import { put, get, del } from '../utils/db';
 import { getMessages } from './ChatActions';
+import { getProfile } from './ProfileActions';
 
 import api from '../apiSingleton.js';
 
@@ -52,7 +53,9 @@ export function logIn(username, password) {
                 password
             });
 
-            console.log('token8888', decodeToken(data.token))
+            const { email } = decodeToken(data.token).payload;
+
+            await dispatch(getProfile({ username, email }));
 
             await put({ token: data.token }, 'token');
 

@@ -16,28 +16,14 @@ export default class Chat extends Component {
 		contacts: this.props.contacts || []
 	}
 
-	renderContacts = () => {
-		const { contacts, withName } = this.state;
-
-		return contacts.length > 0
-			? contacts.map(contact => (
-				<div className='contact' />
-			))
-			: 'you need new to add';
-	}
-
 	render() {
 		const { contacts, withName } = this.state;
 
 		return (
 			<section className='container'>
-                <div className='contacts'>
-					{this.renderContacts()}
-				</div>
-
 				<div className='chat'>
 					{!withName
-						? <Messages withName={withName} sendMessage={this.props.sendMessage} />
+						? <Messages messages={this.props.messages.results} sendMessage={this.props.sendMessage} />
 						: 'choose someone to chat with'}
 				</div>
             </section>
